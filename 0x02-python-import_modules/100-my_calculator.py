@@ -4,15 +4,12 @@ if __name__ == "__main__":
     if len(argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
+    from calculator_1 import add, sub, mul, div
+    ops = {"+": add, "-": sub, "*": mul, "/": div}
+    if sys.argv[2] not in list(ops.keys()):
+        print("Unknown operator. Available operators: +, -, * and /")
+        sys.exit(1)
+
     a = int(sys.argv[1])
     b = int(sys.argv[3])
-    from calculator_1 import add, sub, mul, div
-    ops = ["+", "-", "*", "/"]
-    funcs = [add, sub, mul, div]
-    for i, s in enumerate(ops):
-        if argv[2] == s:
-            print("{} {} {} = {}".format(a, s, b, funcs[i](a, b)))
-            break
-        else:
-            print("Unknown operator. Available operators: +, -, * and /")
-            quit(1)
+    print("{} {} {} = {}".format(a, sys.argv[2], b, ops[sys.argv[2]](a, b)))
