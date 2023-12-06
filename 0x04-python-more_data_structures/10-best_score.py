@@ -1,0 +1,7 @@
+#!/usr/bin/python3
+def best_score(my_dict):
+    if my_dict is None or my_dict == {}:
+        return None
+    for key, value in my_dict.items():
+        if value is max(my_dict.values())
+            return key
