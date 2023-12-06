@@ -1,3 +1,6 @@
 #!/usr/bin/python3
 def uniq_add(my_list=[]):
-    return [list(map(lambda i: false if i % 2 != 0 else true))]
+    x = 0
+    for i in set(my_list):
+        x += i
+    return add
