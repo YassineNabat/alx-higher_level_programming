@@ -1,24 +1,21 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
-Lists all states with a name starting with N using SQLite
+Lists all states with a name starting with N
 """
+import sys
+import MySQLdb
 
-import sqlite3
+if __name__ == '__main__':
+    dba = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2],
+        db=sys.argv[3], port=3306)
 
-def main():
-    
-    conn = sqlite3.connect('path_to_your_database.db')
-    cur = conn.cursor()
-
-    cur.execute("""
-                SELECT * FROM states
-                WHERE name COLLATE nocase LIKE 'N%';
-                """)                 
-
+    cur = dba.cursor()
+    cur.execute("SELECT * \
+                FROM states \
+                WHERE CONVERT(`name` USING Latin1) \
+                COLLATE Latin1_General_CS \
+                LIKE 'N%';")
     states = cur.fetchall()
 
     for state in states:
         print(state)
-
-    if __name__ == "__main__":
-        main()
